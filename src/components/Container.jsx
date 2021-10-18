@@ -4,8 +4,8 @@ import Cards from "./Cards";
 const Container = () => {
   return (
     <>
-      <div className="container border">
-       <Cards />
+      <div className="container border"> 
+        <Cards />
       </div>
     </>
   );
