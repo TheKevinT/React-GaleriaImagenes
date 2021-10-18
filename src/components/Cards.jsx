@@ -24,7 +24,7 @@ const Cards = () => {
     } else {
       setImages(data);
     }
-  },[input]);
+  }, [input]);
 
   useEffect(() => {
     peticion();
@@ -40,15 +40,24 @@ const Cards = () => {
   return (
     <>
       <form onSubmit={_handleSubmit}>
-        <label className="form-label">
+        <label className="form-label w-75">
           Buscar:
-          <input type="text" className="form-control" name="inputText" />
+          <input type="text" className="form-control " name="inputText" />
         </label>
+        <button type="submit" className="btn btn-success m-2">
+          <span className="material-icons">search</span>
+        </button>
       </form>
       <hr />
-      {images.map((img) => {
-        return <Card key={img.id} img={img.urls.regular} />;
-      })}
+      <div className="row">
+        {images.map((img) => {
+          return (
+            <div className="col" key={img.id}>
+              <Card img={img.urls.regular} />
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 };
