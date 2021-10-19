@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Card from "./Card";
 
 const Cards = () => {
   const [images, setImages] = useState([]);
   const [input, setInput] = useState("");
-
+  const ref = useRef(null)
   const peticion = useCallback(async () => {
     const key = "client_id=b5N0C9ewbVx9HtK_nJLcArHy8w7KmB2Ljqez_qbcrmA";
 
@@ -33,13 +33,16 @@ const Cards = () => {
   const _handleSubmit = (e) => {
     e.preventDefault();
     const text = e.target[0].value;
-
     setInput(text);
+    ref.current.reset();
   };
+
+ 
 
   return (
     <>
-      <form onSubmit={_handleSubmit}>
+    
+         <form ref={ref} onSubmit={_handleSubmit} className="text-center">
         <label className="form-label w-75">
           Buscar:
           <input type="text" className="form-control " name="inputText" />
@@ -48,7 +51,9 @@ const Cards = () => {
           <span className="material-icons">search</span>
         </button>
       </form>
-      <hr />
+   
+     
+      
       <div className="row">
         {images.map((img) => {
           return (
