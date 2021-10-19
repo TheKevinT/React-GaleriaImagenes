@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Card from "./Card";
+import Loading from "./Loading";
 
 const Cards = () => {
   const [images, setImages] = useState([]);
   const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(true)
   const ref = useRef(null)
   const peticion = useCallback(async () => {
     const key = "client_id=b5N0C9ewbVx9HtK_nJLcArHy8w7KmB2Ljqez_qbcrmA";
@@ -15,6 +17,7 @@ const Cards = () => {
         input
       )}&${key}`;
     }
+    setLoading(true);
 
     const res = await fetch(route);
 
@@ -24,6 +27,9 @@ const Cards = () => {
     } else {
       setImages(data);
     }
+
+    setLoading(false);
+
   }, [input]);
 
   useEffect(() => {
@@ -52,8 +58,8 @@ const Cards = () => {
         </button>
       </form>
    
-     
-      
+     {loading &&  <Loading  /> }
+    
       <div className="row">
         {images.map((img) => {
           return (
